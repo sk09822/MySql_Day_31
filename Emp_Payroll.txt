@@ -1,0 +1,191 @@
+Microsoft Windows [Version 10.0.18363.418]
+(c) 2019 Microsoft Corporation. All rights reserved.
+
+C:\Users\hp>mysql -u root -p
+Enter password: ********
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 19
+Server version: 8.0.28 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2021, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database Payroll_Service;
+Query OK, 1 row affected (0.20 sec)
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| addressbookservice |
+| information_schema |
+| mysql              |
+| payroll_service    |
+| performance_schema |
+| sakila             |
+| sys                |
+| world              |
+| youtube            |
++--------------------+
+9 rows in set (0.09 sec)
+
+mysql> use Payroll_Service;
+Database changed
+mysql> create table Payroll_Service (id int not null auto_increment, name varchar(50) not null, salary double not null, start date not null, primary key(id));
+Query OK, 0 rows affected (1.95 sec)
+
+mysql> describe Payroll_Service;
++--------+-------------+------+-----+---------+----------------+
+| Field  | Type        | Null | Key | Default | Extra          |
++--------+-------------+------+-----+---------+----------------+
+| id     | int         | NO   | PRI | NULL    | auto_increment |
+| name   | varchar(50) | NO   |     | NULL    |                |
+| salary | double      | NO   |     | NULL    |                |
+| start  | date        | NO   |     | NULL    |                |
++--------+-------------+------+-----+---------+----------------+
+4 rows in set (0.09 sec)
+
+mysql> insert into  payroll_service (name, salary, start) values ('Sandipan', 150000.00, '2022-01-20');
+Query OK, 1 row affected (0.17 sec)
+
+mysql> insert into  payroll_service (name, salary, start) values ('Omprasad', 200000.00, '2022-01-20');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into  payroll_service (name, salary, start) values ('Niranjan', 300000.00, '2022-01-20');
+Query OK, 1 row affected (0.08 sec)
+
+mysql>
+mysql> select * from payroll_service;
++----+----------+--------+------------+
+| id | name     | salary | start      |
++----+----------+--------+------------+
+|  1 | Sandipan | 150000 | 2022-01-20 |
+|  2 | Omprasad | 200000 | 2022-01-20 |
+|  3 | Niranjan | 300000 | 2022-01-20 |
++----+----------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> delete from  payroll_service where name ='Niranjan';
+Query OK, 1 row affected (0.14 sec)
+
+mysql> select * from payroll_service;
++----+----------+--------+------------+
+| id | name     | salary | start      |
++----+----------+--------+------------+
+|  1 | Sandipan | 150000 | 2022-01-20 |
+|  2 | Omprasad | 200000 | 2022-01-20 |
++----+----------+--------+------------+
+2 rows in set (0.03 sec)
+
+mysql> alter table payroll_service add gender char(1) after name;
+Query OK, 0 rows affected (2.46 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from payroll_service;
++----+----------+--------+--------+------------+
+| id | name     | gender | salary | start      |
++----+----------+--------+--------+------------+
+|  1 | Sandipan | NULL   | 150000 | 2022-01-20 |
+|  2 | Omprasad | NULL   | 200000 | 2022-01-20 |
++----+----------+--------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> insert into  payroll_service (name, gender, salary, start) values ('Sandipan','M', 100000.00, '2021-01-20');
+Query OK, 1 row affected (0.15 sec)
+
+mysql> select * from payroll_service;
++----+----------+--------+--------+------------+
+| id | name     | gender | salary | start      |
++----+----------+--------+--------+------------+
+|  1 | Sandipan | NULL   | 150000 | 2022-01-20 |
+|  2 | Omprasad | NULL   | 200000 | 2022-01-20 |
+|  4 | Sandipan | M      | 100000 | 2021-01-20 |
++----+----------+--------+--------+------------+
+3 rows in set (0.01 sec)
+
+mysql> insert into  payroll_service (name, gender, salary, start) values ('Niranjan','M', 300000.00, '2021-01-20');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> select * from payroll_service;
++----+----------+--------+--------+------------+
+| id | name     | gender | salary | start      |
++----+----------+--------+--------+------------+
+|  1 | Sandipan | NULL   | 150000 | 2022-01-20 |
+|  2 | Omprasad | NULL   | 200000 | 2022-01-20 |
+|  4 | Sandipan | M      | 100000 | 2021-01-20 |
+|  5 | Niranjan | M      | 300000 | 2021-01-20 |
++----+----------+--------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> update payroll_service set gender = 'M' where id=1;
+Query OK, 1 row affected (0.08 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from payroll_service;
++----+----------+--------+--------+------------+
+| id | name     | gender | salary | start      |
++----+----------+--------+--------+------------+
+|  1 | Sandipan | M      | 150000 | 2022-01-20 |
+|  2 | Omprasad | NULL   | 200000 | 2022-01-20 |
+|  4 | Sandipan | M      | 100000 | 2021-01-20 |
+|  5 | Niranjan | M      | 300000 | 2021-01-20 |
++----+----------+--------+--------+------------+
+4 rows in set (0.00 sec)
+
+mysql> update payroll_service set gender = 'M' where id=2;
+Query OK, 1 row affected (0.10 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from payroll_service;
++----+----------+--------+--------+------------+
+| id | name     | gender | salary | start      |
++----+----------+--------+--------+------------+
+|  1 | Sandipan | M      | 150000 | 2022-01-20 |
+|  2 | Omprasad | M      | 200000 | 2022-01-20 |
+|  4 | Sandipan | M      | 100000 | 2021-01-20 |
+|  5 | Niranjan | M      | 300000 | 2021-01-20 |
++----+----------+--------+--------+------------+
+4 rows in set (0.00 sec)
+mysql> delete from  payroll_service where id =4;
+Query OK, 1 row affected (0.08 sec)
+
+mysql> select * from payroll_service;
++----+----------+--------+--------+------------+
+| id | name     | gender | salary | start      |
++----+----------+--------+--------+------------+
+|  1 | Sandipan | M      | 150000 | 2022-01-20 |
+|  2 | Omprasad | M      | 200000 | 2022-01-20 |
+|  5 | Niranjan | M      | 300000 | 2021-01-20 |
++----+----------+--------+--------+------------+
+3 rows in set (0.01 sec)
+
+mysql> select sum(salary) from  payroll_service;
++-------------+
+| sum(salary) |
++-------------+
+|      650000 |
++-------------+
+1 row in set (0.05 sec)
+
+mysql> select sum(salary)as SUM_OF_SALARY from  payroll_service;
++---------------+
+| SUM_OF_SALARY |
++---------------+
+|        650000 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> select avg(salary)as AVG_OF_SALARY from  payroll_service;
++--------------------+
+| AVG_OF_SALARY      |
++--------------------+
+| 216666.66666666666 |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql>
